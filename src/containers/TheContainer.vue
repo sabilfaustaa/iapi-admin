@@ -12,7 +12,6 @@
           </CContainer>
         </main>
       </div>
-      <TheFooter/>
     </CWrapper>
   </div>
 </template>
@@ -20,14 +19,12 @@
 <script>
 import TheSidebar from './TheSidebar'
 import TheHeader from './TheHeader'
-import TheFooter from './TheFooter'
 
 export default {
   name: 'TheContainer',
   components: {
     TheSidebar,
     TheHeader,
-    TheFooter
   }
 }
 </script>
@@ -40,5 +37,8 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+.mt-min-5 {
+  margin-top: -0.8rem;
 }
 </style>

@@ -1,1 +1,52 @@
 // Here you can add other styles
+.w-10 {
+  width: 10rem;
+}
+.w-16 {
+  width: 16rem;
+}
+.logo {
+  width: 3rem;
+}
+.font-small {
+  font-size : 12.5px;
+}
+.text-white {
+  color: #fff;
+}
+.shadow {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+}
+.shadow:hover {
+  box-shadow: 0 0 11px rgba(0, 0, 0, 0.2) !important;
+}
+.bg-primary {
+  background-color: #0C2C77 !important;
+}
+.bg-warning {
+  background-color: #F2C94C !important;
+}
+.bg-success {
+  background-color: #27AE60 !important;
+}
+.bg-danger {
+  background-color: #EB5757 !important;
+}
+.text-primary {
+  color: #0C2C77 !important;
+}
+.text-warning {
+  color: #F2C94C !important;
+}
+.text-success {
+  color: #27AE60 !important;
+}
+.text-danger {
+  color: #EB5757 !important;
+}
+.text-blue {
+  color: blue;
+}
+.bold {
+  font-weight: 600;
+}
