@@ -47,6 +47,7 @@
           </CCol>
           <CCol>
             <CInput
+              type="email"
               label="Email"
             />
           </CCol>
@@ -77,13 +78,15 @@
         </CRow>
         <CRow class="mt-3">
           <CCol>
-            <CInput
+            <CTextarea
               label="Visi"
+              rows="6"
             />
           </CCol>
           <CCol>
-            <CInput
+            <CTextarea
               label="Misi"
+              rows="6"
             />
           </CCol>
         </CRow>

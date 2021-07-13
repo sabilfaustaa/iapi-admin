@@ -17,8 +17,19 @@
             <h5>List Kandidat Dewan Pengurus Nasional</h5>
           </CCol>
           <CCol class="text-right">
-            <CButton class="text-success mr-2 shadow"><CIcon name="cil-description" class="mr-1"/>Import Excel</CButton>
-            <CButton class="text-success shadow"><CIcon name="cil-description" class="mr-1"/>Export to Excel</CButton>
+            <input
+              id="fileImport"
+              type="file"
+              hidden
+              @change="(e)=>this.previewFiles(e)"
+            >
+            <CButton class="text-success mr-2 shadow" @click="chooseFilesImport()"><CIcon name="cil-description" class="mr-1"/>Import Excel</CButton>
+            <input
+              id="fileExport"
+              type="file"
+              hidden
+            >
+            <CButton class="text-success shadow" @click="chooseFilesExport()"><CIcon name="cil-description" class="mr-1"/>Export to Excel</CButton>
           </CCol>
         </CRow>
         <CRow class="my-3">
@@ -55,99 +66,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="text-center">
-                  <td>1</td>
-                  <td>1</td>
+                <tr 
+                  class="text-center"
+                  v-for="(data, index) in tables"
+                  :key="index">
+                  <td>{{ index + 1 }}</td>
+                  <td>{{ tables[index].noUrut}}</td>
                   <td>
-                    <img src="img/avatars/1.jpg" class="c-avatar-img" alt="img-user">
+                    <img :src="tables[index].foto" class="c-avatar-img" alt="img-user">
                   </td>
-                  <td>Muhamad Sabil</td>
-                  <td>Dewan Pengurus Nasional</td>
-                  <td>Aktif</td>
-                  <td>
-                    <button class="border-0 bg-transparent">
-                      <img src="img/icons/eye.svg" alt="">
-                    </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-pencil" class="text-primary"></CIcon>
-                    </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-trash" class="text-danger"></CIcon>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="text-center">
-                  <td>1</td>
-                  <td>1</td>
-                  <td>
-                    <img src="img/avatars/4.jpg" class="c-avatar-img" alt="img-user">
-                  </td>
-                  <td>Muhamad Sabil</td>
-                  <td>Dewan Pengurus Nasional</td>
-                  <td>Aktif</td>
-                  <td>
-                    <button class="border-0 bg-transparent">
-                      <img src="img/icons/eye.svg" alt="">
-                    </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-pencil" class="text-primary"></CIcon>
-                    </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-trash" class="text-danger"></CIcon>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="text-center">
-                  <td>1</td>
-                  <td>1</td>
-                  <td>
-                    <img src="img/avatars/3.jpg" class="c-avatar-img" alt="img-user">
-                  </td>
-                  <td>Muhamad Sabil</td>
-                  <td>Dewan Pengurus Nasional</td>
-                  <td>Aktif</td>
-                  <td>
-                    <button class="border-0 bg-transparent">
-                      <img src="img/icons/eye.svg" alt="">
-                    </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-pencil" class="text-primary"></CIcon>
-                    </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-trash" class="text-danger"></CIcon>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="text-center">
-                  <td>1</td>
-                  <td>1</td>
-                  <td>
-                    <img src="img/avatars/6.jpg" class="c-avatar-img" alt="img-user">
-                  </td>
-                  <td>Muhamad Sabil</td>
-                  <td>Dewan Pengurus Nasional</td>
-                  <td>Aktif</td>
-                  <td>
-                    <button class="border-0 bg-transparent">
-                      <img src="img/icons/eye.svg" alt="">
-                    </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-pencil" class="text-primary"></CIcon>
-                    </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-trash" class="text-danger"></CIcon>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="text-center">
-                  <td>1</td>
-                  <td>1</td>
-                  <td>
-                    <img src="img/avatars/5.jpg" class="c-avatar-img" alt="img-user">
-                  </td>
-                  <td>Muhamad Sabil</td>
-                  <td>Dewan Pengurus Nasional</td>
-                  <td>Aktif</td>
+                  <td>{{ tables[index].namaLengkap}}</td>
+                  <td>{{ tables[index].statusPencalonan}}</td>
+                  <td>{{ tables[index].status}}</td>
                   <td>
                     <button class="border-0 bg-transparent">
                       <img src="img/icons/eye.svg" alt="">
@@ -177,20 +107,71 @@
         </CRow>
       </CCardBody>
     </CCard>
-
-    <CModal
-      title="Konfirmasi"
-      size="lg"
-      :show.sync="largeModal"
-    >
-      Apakah anda yakin akan mengirim pesan kepada {{nama}} ?
-    </CModal>
   </div>
 </template>
 
 <script>
 export default {
   name: 'MasterKandidat',
+  tables: [
+    
+  ]
+}
+</script>
+<script>
+export default {
+  name: 'MasterKandidat',
+  data () {
+    return {
+      currentPage: 1,
+      nama: 'Dadan Kusna',
+      tables: [
+        {
+          noUrut: '1',
+          foto: 'img/avatars/1.jpg',
+          namaLengkap: 'Dadan Kusna',
+          statusPencalonan: 'Dewan Pengurus Nasional',
+          status: false
+        },
+        {
+          noUrut: '2',
+          foto: 'img/avatars/2.jpg',
+          namaLengkap: 'Dadan Suhendar',
+          statusPencalonan: 'Dewan Pengurus Nasional',
+          status: true
+        },
+        {
+          noUrut: '3',
+          foto: 'img/avatars/3.jpg',
+          namaLengkap: 'Dadan Ahmad',
+          statusPencalonan: 'Dewan Pengurus Nasional',
+          status: false
+        },
+        {
+          noUrut: '4',
+          foto: 'img/avatars/4.jpg',
+          namaLengkap: 'Dadan Junaedi',
+          statusPencalonan: 'Dewan Pengurus Nasional',
+          status: false
+        },
+        {
+          noUrut: '5',
+          foto: 'img/avatars/5.jpg',
+          namaLengkap: 'Dadan Supratman',
+          statusPencalonan: 'Dewan Pengurus Nasional',
+          status: true
+        },
+      ]
+    }
+  },
+  methods:{
+    chooseFilesImport: function() {
+      document.getElementById("fileImport").click();
+    },
+    chooseFilesExport: function() {
+      document.getElementById("fileExport").click();
+    }
+  }
 }
 </script>
 

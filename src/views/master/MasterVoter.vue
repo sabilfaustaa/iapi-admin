@@ -14,7 +14,12 @@
               @change="(e)=>this.previewFiles(e)"
             >
             <CButton class="text-success mr-2 shadow" @click="chooseFilesImport()"><CIcon name="cil-description" class="mr-1"/>Import Excel</CButton>
-            <CButton class="text-success shadow"><CIcon name="cil-description" class="mr-1"/>Export to Excel</CButton>
+            <input
+              id="fileExport"
+              type="file"
+              hidden
+            >
+            <CButton class="text-success shadow" @click="chooseFilesExport()"><CIcon name="cil-description" class="mr-1"/>Export to Excel</CButton>
           </CCol>
         </CRow>
         <CRow class="my-3">
@@ -191,6 +196,9 @@ export default {
     },
     chooseFilesImport: function() {
       document.getElementById("fileImport").click();
+    },
+    chooseFilesExport: function() {
+      document.getElementById("fileExport").click();
     }
   }
 }
