@@ -160,7 +160,7 @@
     <CRow class="mt-3">
       <CCol class="d-flex justify-content-end pb-4">
         <CButton color="dark" variant="outline" class="ml-auto mr-2" to="/data-master/master-voters">Kembali</CButton>
-        <CButton color="warning" class="mr-2 text-white" @click="largeModal = true">Kirim Email</CButton>
+        <CButton color="warning" class="mr-2 text-white" @click="largeModal = true"> Kirim Email </CButton>
         <CButton color="success">Simpan</CButton>
       </CCol>
     </CRow>
