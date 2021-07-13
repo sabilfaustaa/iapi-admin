@@ -71,13 +71,13 @@
                   v-for="(data, index) in tables"
                   :key="index">
                   <td>{{ index + 1 }}</td>
-                  <td>{{ tables[index].noUrut}}</td>
+                  <td>{{ tables[index].noUrut }}</td>
                   <td>
                     <img :src="tables[index].foto" class="c-avatar-img" alt="img-user">
                   </td>
-                  <td>{{ tables[index].namaLengkap}}</td>
-                  <td>{{ tables[index].statusPencalonan}}</td>
-                  <td>{{ tables[index].status}}</td>
+                  <td>{{ tables[index].namaLengkap }}</td>
+                  <td>{{ tables[index].statusPencalonan }}</td>
+                  <td>{{ tables[index].status }}</td>
                   <td>
                     <button class="border-0 bg-transparent">
                       <img src="img/icons/eye.svg" alt="">
