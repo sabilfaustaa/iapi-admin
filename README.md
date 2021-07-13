@@ -1,2 +1,3 @@
-npm install
-npm i vue-js-xlsx --save
+# Configuration
+- npm install
+- npm i vue-js-xlsx --save
