@@ -126,7 +126,7 @@
       <CRow>
         <CCol class="d-flex justify-content-center">
           <CButton color="primary" @click="modalDouble" class="p-5 w-100">
-            <CIcon name="cil-trash"></CIcon>
+            <!-- <CIcon name="cil-trash"></CIcon> -->
             Take Photo
             
           </CButton>
@@ -134,7 +134,7 @@
         <CCol class="d-flex justify-content-center">
           <input type="file" hidden>
           <CButton color="success" class="p-5 w-100">
-            <CIcon name="cil-trash"></CIcon>
+            <!-- <CIcon name="cil-trash"></CIcon> -->
             Upload Photo
           </CButton>
         </CCol>
@@ -182,10 +182,9 @@
                 Save
               </CButton>
               <input type="file" hidden>
-              <CButton color="warning text-white" id="btnCapture" @click="onCapture">
-                <!-- <CIcon name="cil-trash"></CIcon> -->
-                Capture
-              </CButton>
+              <button class="btn-cam" alt="" id="btnCapture" @click="onCapture">
+                <img src="img/icons/camera.svg" alt="" class="icon-cam">
+              </button>
             </CCol>
           </CRow>
         </CCol>
@@ -295,5 +294,12 @@ export default {
   height: 280px;
   object-fit: cover;
   border-radius: 100%;
+}
+.icon-cam {
+  width: 30px
+}
+.btn-cam {
+  border-radius: 100%;
+  padding: 10px;
 }
 </style>

@@ -10,27 +10,13 @@
         <CRow class="mt-3">
           <CCol>
             <CInput
-              label="Nama Jadwal"
+              disabled
+              label="ID Booth"
             />
           </CCol>
           <CCol>
             <CInput
-              type="date"
-              label="Tanggal"
-            />
-          </CCol>
-        </CRow>
-        <CRow class="mt-3">
-          <CCol>
-            <CInput
-              type="time"
-              label="Waktu Mulai"
-            />
-          </CCol>
-          <CCol>
-            <CInput
-              type="time"
-              label="Waktu Selesai"
+              label="Nama Booth"
             />
           </CCol>
         </CRow>
@@ -39,11 +25,6 @@
             <CTextarea
               label="Lokasi"
               rows="3"
-            />
-          </CCol>
-          <CCol>
-            <CInput
-              label="Kuota"
             />
           </CCol>
         </CRow>
@@ -67,7 +48,7 @@
     </CCard>
     <CRow class="mt-3">
       <CCol class="d-flex justify-content-end pb-4">
-        <CButton color="dark" variant="outline" class="ml-auto mr-2" to="/election/jadwal">Kembali</CButton>
+        <CButton color="dark" variant="outline" class="ml-auto mr-2" to="/data-master/master-booth">Kembali</CButton>
         <CButton color="success">Simpan</CButton>
       </CCol>
     </CRow>

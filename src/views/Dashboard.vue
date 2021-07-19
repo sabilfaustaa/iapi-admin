@@ -171,6 +171,14 @@
             </table>
           </CCol>
         </CRow>
+        <CRow>
+          <CCol class="d-flex justify-content-end">
+            <CPagination
+              size="sm"
+              :active-page.sync="currentPage"
+              :pages="3"/>
+          </CCol>
+        </CRow>
       </CCardBody>
     </CCard>
     <CCard class="border-0 mb-3">

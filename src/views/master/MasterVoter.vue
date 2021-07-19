@@ -76,7 +76,14 @@
                   <td>{{ tables[index].umur}}</td>
                   <td>{{ tables[index].kategoriAnggota}}</td>
                   <td>{{ tables[index].jenisPemilihan}}</td>
-                  <td>{{ tables[index].status === true ? 'Verifikasi' : 'Belum Verifikasi'}}</td>
+                  <td>
+                    <span v-if="tables[index].status" class="text-success">
+                      {{ tables[index].status === true ? 'Verifikasi' : 'Belum Verifikasi'}}
+                    </span>
+                    <span v-else class="text-danger">
+                      {{ tables[index].status === true ? 'Verifikasi' : 'Belum Verifikasi'}}
+                    </span>
+                  </td>
                   <td>
                     <button class="border-0 bg-transparent" @click="detailsModal = true">
                       <img src="img/icons/eye.svg" alt="">

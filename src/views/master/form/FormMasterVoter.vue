@@ -27,20 +27,10 @@
             />
           </CCol>
           <CCol>
-            <CRow>
-              <CCol>
-                <CInput
-                  type="date"
-                  label="Tanggal Lahir"
-                />
-              </CCol>
-              <CCol sm="4">
-                <CInput
-                  label="Umur"
-                  disabled
-                />
-              </CCol>
-            </CRow>
+            <CInput
+              type="date"
+              label="Tanggal Lahir"
+            />
           </CCol>
         </CRow>
         <CRow class="mt-3">
@@ -109,6 +99,18 @@
         <CRow class="mt-3">
           <CCol>
             <CInput
+              label="Longitude"
+            />
+          </CCol>
+          <CCol>
+            <CInput
+              label="Latitude"
+            />
+          </CCol>
+        </CRow>
+        <CRow class="mt-3">
+          <CCol>
+            <CInput
               label="Status Iuran Keanggotaan s/d Tahun 2021"
             />
           </CCol>
@@ -123,19 +125,27 @@
             <label for="" class="mb-3">Jenis Pemilihan</label>
             <CRow>
               <CCol sm="4">
-                <input type="radio" id="fromBooth" value="YES" @click="checkRadio(0)" checked class="mr-2"/>
+                <input type="radio" id="fromBooth" @click="checkRadio(0)" checked name="jenisPemilihan" class="mr-2"/>
                 <label for="fromBooth">Vote From Booth</label>
               </CCol>
               <CCol>
-                <input type="radio" id="fromVfh" value="NO" @click="checkRadio(1)"  class="mr-2"/>
+                <input type="radio" id="fromVfh" @click="checkRadio(1)" name="jenisPemilihan" class="mr-2"/>
                 <label for="fromVfh">Vote From Home</label>
               </CCol>
             </CRow>
           </CCol>
           <CCol>
-            <CSelect
-              label="Status"
-            />
+            <label for="" class="mb-3">Status Voter</label>
+            <CRow>
+              <CCol sm="4">
+                <input type="radio" id="dps" name="statusVoters" class="mr-2"/>
+                <label for="dps">DPS</label>
+              </CCol>
+              <CCol>
+                <input type="radio" id="nondps" name="statusVoters" class="mr-2"/>
+                <label for="nondps">Non DPS</label>
+              </CCol>
+            </CRow>
           </CCol>
         </CRow>
         <CRow class="mt-3" id="booth">
@@ -196,13 +206,11 @@ export default {
   methods : {
     checkRadio : function (a) {
       if (a == 0) {
-        document.getElementById('fromVfh').checked = false;
-        document.getElementById('booth').style.display = "block"
+        document.getElementById('booth').style.display = "flex"
         document.getElementById('vfh').style.display = "none"
       } else {
-        document.getElementById('fromBooth').checked = false;
         document.getElementById('booth').style.display = "none"
-        document.getElementById('vfh').style.display = "block"
+        document.getElementById('vfh').style.display = "flex"
       }
 
     }

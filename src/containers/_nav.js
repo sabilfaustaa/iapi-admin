@@ -22,6 +22,10 @@ export default [
             name: 'Master Kandidat',
             to: '/data-master/master-kandidat'
           },
+          {
+            name: 'Master Booth',
+            to: '/data-master/master-booth'
+          },
         ]
       },
       {
@@ -59,7 +63,7 @@ export default [
       {
         _name: 'CSidebarNavItem',
         name: 'User Management',
-        to: '/user',
+        to: '/users',
         icon: 'cil-people',
       },
       {
@@ -69,10 +73,20 @@ export default [
         icon: 'cil-lock-locked',
       },
       {
-        _name: 'CSidebarNavItem',
+        _name: 'CSidebarNavDropdown',
         name: 'Report',
-        to: '/report',
+        route: '/election',
         icon: 'cil-description',
+        items: [
+          {
+            name: 'Laporan Suara Kandidat',
+            to: '/report/suara-kandidat'
+          },
+          {
+            name: 'Laporan Suara Masuk',
+            to: '/report/suara-masuk'
+          }
+        ]
       },
       {
         _name: 'CSidebarNavItem',

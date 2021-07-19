@@ -4,8 +4,10 @@ import Router from 'vue-router'
 // Views - Master
 import MasterVoters from '../views/master/MasterVoter'
 import MasterKandidat from '../views/master/MasterKandidat'
+import MasterBooth from '../views/master/MasterBooth'
 import FormMasterVoters from '../views/master/form/FormMasterVoter'
 import FormMasterKandidat from '../views/master/form/FormMasterKandidat'
+import FormMasterBooth from '../views/master/form/FormMasterBooth'
 
 // Views Verifikasi
 import VFHApproval from '../views/verifikasi/VFHApproval'
@@ -23,9 +25,12 @@ import FormBooth from '../views/election/form/FormBooth'
 import UserManagement from '../views/user/UserManagement'
 import FormUserManagement from '../views/user/form/FormUserManagement'
 
+// Views - Report
+import ReportSuaraKandidat from '../views/report/ReportSuaraKandidat'
+import ReportSuaraMasuk from '../views/report/ReportSuaraMasuk'
+
 // Views - Security, Report, Log Activity
 import Security from '../views/Security'
-import Report from '../views/Report'
 import LogActivity from '../views/LogActivity'
 
 import LupaPassword from '../views/LupaPassword'
@@ -89,6 +94,14 @@ function configRoutes () {
             {
               path: 'master-kandidat',
               component: MasterKandidat
+            },
+            {
+              path: 'tambah-booth',
+              component: FormMasterBooth,
+            },
+            {
+              path: 'master-booth',
+              component: MasterBooth
             }
           ]
         },
@@ -102,7 +115,7 @@ function configRoutes () {
           children: [
             {
               path: '',
-              name: 'VFH Approval',
+              name: 'Verifikasi',
               component: VFHApproval
             },
             {
@@ -122,7 +135,7 @@ function configRoutes () {
           children: [
             {
               path: '',
-              name: 'Verifikasi Data',
+              name: 'Verifikasi',
               component: VoterDataVerifikasi
             },
             {
@@ -174,9 +187,9 @@ function configRoutes () {
           ]
         },
         {
-          path: 'user',
+          path: 'users',
           name: 'User Management',
-          redirect: '/user/user-management',
+          redirect: '/users/user-management',
           component: {
             render (c) { return c('router-view') }
           },
@@ -192,14 +205,27 @@ function configRoutes () {
           ]
         },
         {
+          path: 'report',
+          name: 'Report',
+          redirect: '/report/suara-kandidat',
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: 'suara-kandidat',
+              component: ReportSuaraKandidat,
+            },
+            {
+              path: 'suara-masuk',
+              component: ReportSuaraMasuk,
+            }
+          ]
+        },
+        {
           name: 'Security',
           path: 'security',
           component: Security
-        },
-        {
-          name: 'Report',
-          path: 'report',
-          component: Report
         },
         {
           name: 'Log Activity',
