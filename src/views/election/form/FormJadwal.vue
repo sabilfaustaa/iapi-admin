@@ -15,6 +15,7 @@
           </CCol>
           <CCol>
             <CInput
+              type="date"
               label="Tanggal"
             />
           </CCol>
@@ -35,13 +36,13 @@
           <CCol sm="6">
             <label for="" class="mb-3">Status</label>
             <CRow>
-              <CCol>
-                <input type="radio" class="mr-2"/>
-                <label for="">Aktif</label>
+              <CCol sm="3">
+                <input type="radio" name="status" id="aktif" class="mr-2"/>
+                <label for="aktif">Aktif</label>
               </CCol>
               <CCol>
-                <input type="radio" class=""/>
-                <label for="">Tidak Aktif</label>
+                <input type="radio" name="status" id="nonaktif" class="mr-2"/>
+                <label for="nonaktif">Tidak Aktif</label>
               </CCol>
             </CRow>
           </CCol>

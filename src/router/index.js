@@ -1,18 +1,37 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+// Views - Master
+import MasterVoters from '../views/master/MasterVoter'
+import MasterKandidat from '../views/master/MasterKandidat'
+import FormMasterVoters from '../views/master/form/FormMasterVoter'
+import FormMasterKandidat from '../views/master/form/FormMasterKandidat'
+
+// Views Verifikasi
+import VFHApproval from '../views/verifikasi/VFHApproval'
+import DetailVFHApproval from '../views/verifikasi/details/DetailVFHApproval'
+import VoterDataVerifikasi from '../views/verifikasi/VoterDataVerifikasi'
+import DetailVoterDataVerifikasi from '../views/verifikasi/details/DetailVotersDataVerifikasi'
+
+// Views - Election
 import Jadwal from '../views/election/Jadwal'
 import Booth from '../views/election/Booth'
 import FormJadwal from '../views/election/form/FormJadwal'
 import FormBooth from '../views/election/form/FormBooth'
-import FormMasterVoters from '../views/master/form/FormMasterVoter'
-import FormMasterKandidat from '../views/master/form/FormMasterKandidat'
-import MasterVoters from '../views/master/MasterVoter'
-import MasterKandidat from '../views/master/MasterKandidat'
+
+// Views - UserManagement
 import UserManagement from '../views/user/UserManagement'
 import FormUserManagement from '../views/user/form/FormUserManagement'
+
+// Views - Security, Report, Log Activity
 import Security from '../views/Security'
 import Report from '../views/Report'
 import LogActivity from '../views/LogActivity'
+
+import LupaPassword from '../views/LupaPassword'
+import Login from '../views/Login'
+import VerifikasiKode from '../views/VerifikasiKode'
+import PasswordBaru from '../views/PasswordBaru'
 
 // Containers
 const TheContainer = () => import('@/containers/TheContainer')
@@ -20,14 +39,11 @@ const TheContainer = () => import('@/containers/TheContainer')
 // Views
 const Dashboard = () => import('@/views/Dashboard')
 
-// Views - Master
-const ListApproval = () => import('@/views/master/ListApproval')
-
 // Views - Pages
 const Page404 = () => import('@/views/pages/Page404')
 const Page500 = () => import('@/views/pages/Page500')
 const Register = () => import('@/views/pages/Register')
-const Login = () => import('@/views/pages/Login')
+// const Login = () => import('@/views/pages/Login')
 
 Vue.use(Router)
 
@@ -73,13 +89,64 @@ function configRoutes () {
             {
               path: 'master-kandidat',
               component: MasterKandidat
-            },
-            {
-              path: 'list-approval',
-              component: ListApproval
-            }, 
+            }
           ]
         },
+        {
+          path: 'vfh-approval',
+          component: {
+            render(c) {
+              return c('router-view')
+            }
+          },
+          children: [
+            {
+              path: '',
+              name: 'VFH Approval',
+              component: VFHApproval
+            },
+            {
+              path: 'detail',
+              name: 'Voters',
+              component: DetailVFHApproval
+            }
+          ]
+        },
+        {
+          path: 'verifikasi-data',
+          component: {
+            render(c) {
+              return c('router-view')
+            }
+          },
+          children: [
+            {
+              path: '',
+              name: 'Verifikasi Data',
+              component: VoterDataVerifikasi
+            },
+            {
+              path: 'detail',
+              name: 'Verifikasi',
+              component: DetailVoterDataVerifikasi
+            }
+          ]
+        },
+        // {
+        //   path: 'verifikasi',
+        //   name: 'Verifikasi',
+        //   redirect: '/verifikasi/vfh-approval',
+        //   component: {
+        //     render (c) { return c('router-view') }
+        //   },
+        //   children: [
+        //     // {
+        //     //   path: 'vfh-approval',
+        //     //   component: VFHApproval,
+        //     // },
+            
+        //   ]
+        // },
         {
           path: 'election',
           name: 'Election Management',
@@ -144,6 +211,18 @@ function configRoutes () {
     {
       path: '/login',
       component: Login
+    },
+    {
+      path: '/lupa-password',
+      component: LupaPassword
+    },
+    {
+      path: '/verifikasi-kode',
+      component: VerifikasiKode
+    },
+    {
+      path: '/password-baru',
+      component: PasswordBaru
     }
   
     // {
@@ -213,209 +292,6 @@ function configRoutes () {
     //         }
     //       ]
     //     },
-    //     {
-    //       path: 'base',
-    //       redirect: '/base/cards',
-    //       name: 'Base',
-    //       component: {
-    //         render (c) { return c('router-view') }
-    //       },
-    //       children: [
-    //         {
-    //           path: 'cards',
-    //           name: 'Cards',
-    //           component: Cards
-    //         },
-    //         {
-    //           path: 'forms',
-    //           name: 'Forms',
-    //           component: Forms
-    //         },
-    //         {
-    //           path: 'switches',
-    //           name: 'Switches',
-    //           component: Switches
-    //         },
-    //         {
-    //           path: 'tables',
-    //           name: 'Tables',
-    //           component: Tables
-    //         },
-    //         {
-    //           path: 'tabs',
-    //           name: 'Tabs',
-    //           component: Tabs
-    //         },
-    //         {
-    //           path: 'breadcrumbs',
-    //           name: 'Breadcrumbs',
-    //           component: Breadcrumbs
-    //         },
-    //         {
-    //           path: 'carousels',
-    //           name: 'Carousels',
-    //           component: Carousels
-    //         },
-    //         {
-    //           path: 'collapses',
-    //           name: 'Collapses',
-    //           component: Collapses
-    //         },
-    //         {
-    //           path: 'jumbotrons',
-    //           name: 'Jumbotrons',
-    //           component: Jumbotrons
-    //         },
-    //         {
-    //           path: 'list-groups',
-    //           name: 'List Groups',
-    //           component: ListGroups
-    //         },
-    //         {
-    //           path: 'navs',
-    //           name: 'Navs',
-    //           component: Navs
-    //         },
-    //         {
-    //           path: 'navbars',
-    //           name: 'Navbars',
-    //           component: Navbars
-    //         },
-    //         {
-    //           path: 'paginations',
-    //           name: 'Paginations',
-    //           component: Paginations
-    //         },
-    //         {
-    //           path: 'popovers',
-    //           name: 'Popovers',
-    //           component: Popovers
-    //         },
-    //         {
-    //           path: 'progress-bars',
-    //           name: 'Progress Bars',
-    //           component: ProgressBars
-    //         },
-    //         {
-    //           path: 'tooltips',
-    //           name: 'Tooltips',
-    //           component: Tooltips
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       path: 'master',
-    //       redirect: '/master/master-voters',
-    //       name: 'Master',
-    //       component: {
-    //         render (c) { return c('router-view') }
-    //       },
-    //       children: [
-    //         {
-    //           path: 'master-voters',
-    //           name: 'Master Voters',
-    //           component: MasterVoters,
-    //         },
-    //         {
-    //           path: 'tambah-voters',
-    //           name: 'Tambah Voters',
-    //           component: TambahVoters,
-    //         },
-    //         {
-    //           path: 'master-kandidat',
-    //           name: 'Master Kandidat',
-    //           component: MasterKandidat
-    //         },
-    //         {
-    //           path: 'list-approval',
-    //           name: 'List Approval',
-    //           component: ListApproval
-    //         },
-            
-    //       ]
-    //     },
-    //     {
-    //       path: 'icons',
-    //       redirect: '/icons/coreui-icons',
-    //       name: 'CoreUI Icons',
-    //       component: {
-    //         render (c) { return c('router-view') }
-    //       },
-    //       children: [
-    //         {
-    //           path: 'coreui-icons',
-    //           name: 'Icons library',
-    //           component: CoreUIIcons
-    //         },
-    //         {
-    //           path: 'brands',
-    //           name: 'Brands',
-    //           component: Brands
-    //         },
-    //         {
-    //           path: 'flags',
-    //           name: 'Flags',
-    //           component: Flags
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       path: 'notifications',
-    //       redirect: '/notifications/alerts',
-    //       name: 'Notifications',
-    //       component: {
-    //         render (c) { return c('router-view') }
-    //       },
-    //       children: [
-    //         {
-    //           path: 'alerts',
-    //           name: 'Alerts',
-    //           component: Alerts
-    //         },
-    //         {
-    //           path: 'badges',
-    //           name: 'Badges',
-    //           component: Badges
-    //         },
-    //         {
-    //           path: 'modals',
-    //           name: 'Modals',
-    //           component: Modals
-    //         }
-    //       ]
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: '/pages',
-    //   redirect: '/pages/404',
-    //   name: 'Pages',
-    //   component: {
-    //     render (c) { return c('router-view') }
-    //   },
-    //   children: [
-    //     {
-    //       path: '404',
-    //       name: 'Page404',
-    //       component: Page404
-    //     },
-    //     {
-    //       path: '500',
-    //       name: 'Page500',
-    //       component: Page500
-    //     },
-    //     {
-    //       path: 'login',
-    //       name: 'Login',
-    //       component: Login
-    //     },
-    //     {
-    //       path: 'register',
-    //       name: 'Register',
-    //       component: Register
-    //     }
-    //   ]
-    // }
   ]
 }
 

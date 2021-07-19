@@ -62,8 +62,9 @@
             />
           </CCol>
           <CCol>
-            <CInput
+            <CTextarea
               label="Alamat KAP"
+              rows="3"
             />
           </CCol>
         </CRow>
@@ -81,12 +82,14 @@
         </CRow>
         <CRow class="mt-3">
           <CCol>
-            <CInput
+            <CTextarea
+              rows="3"
               label="Alamat Rumah Sesuai KTP"
             />
           </CCol>
           <CCol>
-            <CInput
+            <CTextarea
+              rows="3"
               label="Alamat Domisili"
             />
           </CCol>
@@ -119,13 +122,13 @@
           <CCol>
             <label for="" class="mb-3">Jenis Pemilihan</label>
             <CRow>
-              <CCol>
-                <input type="radio" class="mr-2"/>
-                <label for="">Aktif</label>
+              <CCol sm="4">
+                <input type="radio" id="fromBooth" value="YES" @click="checkRadio(0)" checked class="mr-2"/>
+                <label for="fromBooth">Vote From Booth</label>
               </CCol>
               <CCol>
-                <input type="radio" class=""/>
-                <label for="">Tidak Aktif</label>
+                <input type="radio" id="fromVfh" value="NO" @click="checkRadio(1)"  class="mr-2"/>
+                <label for="fromVfh">Vote From Home</label>
               </CCol>
             </CRow>
           </CCol>
@@ -135,22 +138,23 @@
             />
           </CCol>
         </CRow>
-        <CRow class="mt-3">
-          <CCol>
+        <CRow class="mt-3" id="booth">
+          <CCol sm="6">
             <CSelect
               label="Lokasi Booth Pemilihan"
             />
           </CCol>
-          <CCol>
+          <CCol sm="6">
             <CSelect
               label="Jam Pemilihan"
             />
           </CCol>
         </CRow>
-        <CRow class="mt-3">
+        <CRow class="mt-3" id="vfh" style="display: none;">
           <CCol sm="6">
-            <label for="" class="mb-3">Upload Form VFH</label>
+            <label for="uploadFileVFH" class="mb-3">Upload Form VFH</label>
             <CInputFile
+              id="uploadFileVFH"
               custom
             />
           </CCol>
@@ -165,12 +169,18 @@
       </CCol>
     </CRow>
 
+    <!-- Send Email Modal -->
     <CModal
       title="Konfirmasi"
-      size="lg"
+      size="md"
       :show.sync="largeModal"
     >
-      Apakah anda yakin akan mengirim pesan kepada Dadan Koswara ?
+      Yakin akan mengirim email ?
+
+      <template #footer>
+        <CButton @click="largeModal = false" color="danger">Cancel</CButton>
+        <CButton @click="largeModal = false" color="success">Send</CButton>
+      </template>
     </CModal>
   </div>
 </template>
@@ -181,6 +191,20 @@ export default {
   data () {
     return {
       largeModal: false,
+    }
+  },
+  methods : {
+    checkRadio : function (a) {
+      if (a == 0) {
+        document.getElementById('fromVfh').checked = false;
+        document.getElementById('booth').style.display = "block"
+        document.getElementById('vfh').style.display = "none"
+      } else {
+        document.getElementById('fromBooth').checked = false;
+        document.getElementById('booth').style.display = "none"
+        document.getElementById('vfh').style.display = "block"
+      }
+
     }
   }
 }

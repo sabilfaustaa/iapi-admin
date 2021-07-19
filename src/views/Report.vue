@@ -2,12 +2,26 @@
   <div>
     <CRow>
       <CCol>
-        <CNav fill variant="tabs" class="mb-4">
+        <!-- <CNav fill variant="tabs" class="mb-4">
           <CNavItem class="active">Dewan Pengurus Nasional</CNavItem>
           <CNavItem>Dewan Pengurus Wilayah</CNavItem>
           <CNavItem>Dewan Pengurus Anggota Madya</CNavItem>
           <CNavItem>Dewan Pengawas</CNavItem>
-        </CNav>
+        </CNav> -->
+        <ul class="nav nav-pills nav-justified border-bottom mb-4">
+          <li class="nav-item">
+            <a class="nav-link active" @click="activePage(0)" aria-current="page">Dewan Pengurus Nasional</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" @click="activePage(1)">Dewan Pengurus Wilayah</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" @click="activePage(2)">Dewan Pengurus Anggota Madya</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" @click="activePage(3)">Dewan Pengawas</a>
+          </li>
+        </ul>
       </CCol>
     </CRow>
     <CCard class="border-0">
@@ -80,6 +94,36 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'MasterKandidat',
+  data () {
+    return {
+      currentPage: 1,
+    }
+  },
+  methods:{
+    activePage: function (x) {
+      const a = document.querySelectorAll('.nav-link');
+      for (let i = 0; i < a.length; i++) {
+        if(a[i].classList.contains('active')) {
+          a[i].classList.remove('active');
+        }
+        if(x == 1) {
+          a[1].classList.add('active');
+        } else if ( x == 2 ) {
+          a[2].classList.add('active');
+        } else if ( x == 3 ) {
+          a[3].classList.add('active');
+        } else {
+          a[0].classList.add('active');
+        }
+      }
+    }
+  }
+}
+</script>
+
 <style scoped>
 .cselect {
   width: 4rem;
@@ -88,9 +132,14 @@
   width: 30px;
   margin-top: -5px;
 }
-/* .active {
-  color: blue;
+.active {
+  color: blue !important;
   font-weight: 700;
   border-bottom: 3px solid blue;
-} */
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+.nav-link {
+  cursor: pointer !important;
+}
 </style>

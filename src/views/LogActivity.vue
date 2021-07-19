@@ -21,12 +21,12 @@
             <h5 class="mt-2">Filter</h5>
             <CInput
               class="w-10 mx-3"
-              placeholder="DD/MM/YYYY"
+              type="date"
             />
             <span class="font-small mt-2">s/d</span>
             <CInput
               class="w-10 mx-3"
-              placeholder="DD/MM/YYYY"
+              type="date"
             />
             <div>
               <CButton color="success">Terapkan</CButton>
@@ -39,7 +39,7 @@
               <thead class="bg-primary">
                 <tr class="text-center">
                   <td>No</td>
-                  <td>Tangga</td>
+                  <td>Tanggal</td>
                   <td>User</td>
                   <td>Role</td>
                   <td>Menu</td>
@@ -58,8 +58,8 @@
                   <td>Master Voters</td>
                   <td>Tambah Data Voters</td>
                   <td>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-description" class="text-warning"></CIcon>
+                    <button class="border-0 bg-transparent" @click="detailsModal = true">
+                      <img src="img/icons/eye.svg" alt="">
                     </button>
                   </td>
                 </tr>
@@ -80,5 +80,64 @@
         </CRow>
       </CCardBody>
     </CCard>
+
+    <!-- Detail Modal -->
+    <CModal
+      title="Details"
+      centered
+      :show.sync="detailsModal"
+    >
+      <table class="table border my-3">
+        <tr class="py-3">
+          <td class="py-2" width="200px">Tanggal</td>
+          <td>:</td>
+          <td class="bold">10-06-2021, 10:00</td>
+        </tr>
+        <tr>
+          <td class="py-2">User</td>
+          <td>:</td>
+          <td class="bold">Muhamad Sabil</td>
+        </tr>
+        <tr>
+          <td class="py-2">Role</td>
+          <td>:</td>
+          <td class="bold">Admin</td>
+        </tr>
+        <tr>
+          <td class="py-2">Menu</td>
+          <td>:</td>
+          <td class="bold">Data Master</td>
+        </tr>
+        <tr>
+          <td class="py-2">Sub Menu</td>
+          <td>:</td>
+          <td class="bold">Master Voters</td>
+        </tr>
+        <tr>
+          <td class="py-2">Activity</td>
+          <td>:</td>
+          <td class="bold">Tambah Data Voters</td>
+        </tr>
+      </table>
+
+      <template #footer>
+        <div class="">
+
+        </div>
+      </template>
+    </CModal>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'LogActivity',
+  data () {
+    return {
+      currentPage: 1,
+      detailsModal: false,
+    }
+  }
+}
+</script>
+

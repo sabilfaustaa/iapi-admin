@@ -3,23 +3,12 @@
     <CCard class="border-0">
       <CCardBody class="p-4">
         <CRow>
-          <CCol>
+          <CCol sm="2">
             <h5>List Voters</h5>
           </CCol>
           <CCol class="text-right">
-            <input
-              id="fileImport"
-              type="file"
-              hidden
-              @change="(e)=>this.previewFiles(e)"
-            >
-            <CButton class="text-success mr-2 shadow" @click="chooseFilesImport()"><CIcon name="cil-description" class="mr-1"/>Import Excel</CButton>
-            <input
-              id="fileExport"
-              type="file"
-              hidden
-            >
-            <CButton class="text-success shadow" @click="chooseFilesExport()"><CIcon name="cil-description" class="mr-1"/>Export to Excel</CButton>
+            <CButton class="text-success mr-2 shadow" @click="importModal = true"><CIcon name="cil-description" class="mr-1"/>Import Excel</CButton>
+            <CButton class="text-success shadow"><CIcon name="cil-description" class="mr-1"/>Export to Excel</CButton>
           </CCol>
         </CRow>
         <CRow class="my-3">
@@ -34,9 +23,7 @@
           <CCol md="9" class="text-right d-flex justify-content-end">
             <div>
               <CButton
-                color="dark"
-                variant="outline"
-                class="mr-3 w-5 text-left">
+                class="mr-3 w-5 text-left bg-black">
                 <span>Non DPS</span>
                 <img src="img/icons/Filter 2.svg" class="ml-5" alt="">
               </CButton>
@@ -46,7 +33,7 @@
               placeholder="Cari"
             />
             <div>
-              <CButton color="warning" class="text-white mr-2" @click="largeModal = true">
+              <CButton color="warning" class="text-white mr-2" @click="sendEmailModal = true">
                 Kirim Email
               </CButton>
               <CButton color="success" to="/data-master/tambah-voters"><CIcon name="cil-plus"/><span class="ml-1">Tambah</span></CButton>
@@ -59,15 +46,12 @@
               <thead class="bg-primary">
                 <tr class="text-center">
                   <td>
-                    <CInputCheckbox
-                      :custom="true"
-                      id="checkAll"
-                    />
+                    <input type="checkbox" id="checkAll" @change="checkAll" class="check">
                   </td>
                   <td>No</td>
                   <td>No Reg. IAPI</td>
-                  <td>Nama Lengkap</td>
-                  <td>Email</td>
+                  <td class="text-left">Nama Lengkap</td>
+                  <td class="text-left">Email</td>
                   <td>Tanggal Lahir</td>
                   <td>Umur</td>
                   <td>Kategori Anggota</td>
@@ -82,27 +66,25 @@
                   v-for="(data, index) in tables"
                   :key="index">
                   <td>
-                    <CInputCheckbox
-                      :custom="true"
-                    />
+                    <input type="checkbox" id="check" @change="check" class="check">
                   </td>
-                  <td>{{ index + 1 }}</td>
+                  <td>{{ index + 1 }}</td>  
                   <td>{{ tables[index].noRegIAPI}}</td>
-                  <td>{{ tables[index].namaLengkap}}</td>
-                  <td>{{ tables[index].email}}</td>
+                  <td class="text-left">{{ tables[index].namaLengkap}}</td>
+                  <td class="text-left">{{ tables[index].email}}</td>
                   <td>{{ tables[index].tanggalLahir}}</td>
                   <td>{{ tables[index].umur}}</td>
                   <td>{{ tables[index].kategoriAnggota}}</td>
                   <td>{{ tables[index].jenisPemilihan}}</td>
                   <td>{{ tables[index].status === true ? 'Verifikasi' : 'Belum Verifikasi'}}</td>
                   <td>
-                    <button class="border-0 bg-transparent">
+                    <button class="border-0 bg-transparent" @click="detailsModal = true">
                       <img src="img/icons/eye.svg" alt="">
                     </button>
                     <button class="border-0 bg-transparent">
                       <CIcon name="cil-pencil" class="text-primary"></CIcon>
                     </button>
-                    <button class="border-0 bg-transparent">
+                    <button class="border-0 bg-transparent" @click="deleteModal = true">
                       <CIcon name="cil-trash" class="text-danger"></CIcon>
                     </button>
                   </td>
@@ -125,26 +107,130 @@
       </CCardBody>
     </CCard>
 
+    <!-- Send Email Modal -->
     <CModal
       title="Konfirmasi"
-      size="lg"
-      :show.sync="largeModal"
+      size="md"
+      :show.sync="sendEmailModal"
     >
-      Apakah anda yakin akan mengirim pesan kepada {{nama}} ?
+      Yakin akan mengirim email ?
+
+      <template #footer>
+        <CButton @click="sendEmailModal = false" color="danger">Cancel</CButton>
+        <CButton @click="sendEmailModal = false" color="success">Send</CButton>
+      </template>
+    </CModal>
+
+    <!-- Delete Modal -->
+    <CModal
+      size="md"
+      title="Konfirmasi"
+      :show.sync="deleteModal"
+    >
+      Yakin hapus data baris ini ?
+      <template #footer>
+        <CButton @click="deleteModal = false" color="danger">Discard</CButton>
+        <CButton @click="deleteModal = false" color="success">Accept</CButton>
+      </template>
+    </CModal>
+
+    <!-- Import File Modal -->
+    <CModal
+      title="Import Excel"
+      centered
+      :show.sync="importModal"
+    >
+      <div class="">
+        <label for="btnDownload">Format File Import</label>
+        <button class="btn btn-success w-100" id="btnDownload">Download File Import</button>
+      </div>
+      <div class="mt-3">
+        <label for="importExcel">Upload File Excel</label>
+        <CInputFile
+          custom
+          id="importExcel"
+        />
+      </div>
+
+      <template #footer>
+        <CButton @click="importModal = false" color="danger">Cancel</CButton>
+        <CButton @click="importModal = false" color="primary">Submit</CButton>
+      </template>
+    </CModal>
+
+    <!-- Detail Modal -->
+    <CModal
+      title="Details"
+      centered
+      :show.sync="detailsModal"
+    >
+      <table class="table border my-3">
+        <tr class="py-3">
+          <td class="py-2" width="200px">No Reg. IAPI</td>
+          <td>:</td>
+          <td class="bold">001</td>
+        </tr>
+        <tr>
+          <td class="py-2">Nama Lengkap</td>
+          <td>:</td>
+          <td class="bold">Dadan Kusna</td>
+        </tr>
+        <tr>
+          <td class="py-2">Email</td>
+          <td>:</td>
+          <td class="bold">dadan123@gmail.com</td>
+        </tr>
+        <tr>
+          <td class="py-2">Tanggal Lahir</td>
+          <td>:</td>
+          <td class="bold">10-06-1980</td>
+        </tr>
+        <tr>
+          <td class="py-2">Umur</td>
+          <td>:</td>
+          <td class="bold">45 tahun</td>
+        </tr>
+        <tr>
+          <td class="py-2">kategori Anggota</td>
+          <td>:</td>
+          <td class="bold">Profesional</td>
+        </tr>
+        <tr>
+          <td class="py-2">Jenis Pemilihan</td>
+          <td>:</td>
+          <td class="bold">
+            VFH
+          </td>
+        </tr>
+        <tr>
+          <td class="py-2">Status</td>
+          <td>:</td>
+          <td class="bold">
+            Belum Verifikasi
+          </td>
+        </tr>
+      </table>
+
+      <template #footer>
+        <div class="">
+
+        </div>
+      </template>
     </CModal>
   </div>
 </template>
 
 <script>
-import XLSX from '../../../node_modules/xlsx/dist/xlsx.full.min.js'
-var reader = new FileReader()
+
 export default {
   name: 'MasterVoters',
   data () {
     return {
-      currentPage: 1,
-      largeModal: false,
-      nama: 'Dadan Kusna',
+      // currentPage: 1,
+      sendEmailModal: false,
+      deleteModal: false,
+      detailsModal: false,
+      importModal: false,
       tables: [
         {
           noRegIAPI: '001',
@@ -175,32 +261,65 @@ export default {
           kategoriAnggota: 'Lanjutan',
           jenisPemilihan: 'VFH',
           status: true
-        }
+        },
+        {
+          noRegIAPI: '003',
+          namaLengkap: 'Dadan Koswara',
+          email: 'dadankos123@gmail.com',
+          tanggalLahir: '10-06-1980',
+          umur: '42',
+          kategoriAnggota: 'Lanjutan',
+          jenisPemilihan: 'VFH',
+          status: true
+        },
+        {
+          noRegIAPI: '003',
+          namaLengkap: 'Dadan Koswara',
+          email: 'dadankos123@gmail.com',
+          tanggalLahir: '10-06-1980',
+          umur: '42',
+          kategoriAnggota: 'Lanjutan',
+          jenisPemilihan: 'VFH',
+          status: true
+        },
+        {
+          noRegIAPI: '003',
+          namaLengkap: 'Dadan Koswara',
+          email: 'dadankos123@gmail.com',
+          tanggalLahir: '10-06-1980',
+          umur: '42',
+          kategoriAnggota: 'Lanjutan',
+          jenisPemilihan: 'VFH',
+          status: true
+        },
       ]
     }
   },
+  // mounted() {
+  //   this.checkAll();
+  // },
   methods:{
-    previewFiles(e) {
-      // var files = e.target.files, f = files[0];
-      
-      reader.onload = function (e) {
-        var data = e.target.result
-        var workbook = XLSX.read(data, { type: 'binary' })
-        let sheetName = workbook.SheetNames[0]
-        let worksheet = workbook.Sheets[sheetName]
-        let rowObject = XLSX.utils.sheet_to_row_object_array(worksheet)
-        const finalJsonData = JSON.stringify(rowObject, undefined, 4)
-        console.log(finalJsonData)
+    checkAll : function() {
+      const a = document.getElementById('checkAll');
+      const b = document.querySelectorAll('#check');
+      for (let i = 0; i < b.length; i++) {
+        if(a.checked === true) {
+          b[i].checked = true;
+        } else {
+          b[i].checked = false;
+        }
       }
-      // reader.readAsBinaryString(this.worksheet)
     },
-    chooseFilesImport: function() {
-      document.getElementById("fileImport").click();
-    },
-    chooseFilesExport: function() {
-      document.getElementById("fileExport").click();
+    check : function() {
+      const a = document.getElementById('checkAll');
+      const b = document.querySelectorAll('#check');
+      for (let i = 0; i < b.length; i++) {
+        if(b[i].checked === false) {
+          a.checked = false;
+        }
+      }
     }
-  }
+  },
 }
 </script>
 
@@ -210,5 +329,21 @@ export default {
 }
 .w-5 {
   width: 9rem;
+}
+.bg-black:hover {
+  background-color: #fff;
+  color: #000;
+}
+.bg-black:active {
+  background-color: #fff;
+}
+.bg-black {
+  color: #000;
+  border-color: #d8dbe0;
+  background-color: #fff;
+}
+.check {
+  width: 15px;
+  height: 15px;
 }
 </style>

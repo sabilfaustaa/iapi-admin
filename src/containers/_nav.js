@@ -22,9 +22,21 @@ export default [
             name: 'Master Kandidat',
             to: '/data-master/master-kandidat'
           },
+        ]
+      },
+      {
+        _name: 'CSidebarNavDropdown',
+        name: 'Verifikasi',
+        route: '/vfh-approval',
+        icon: 'cil-shield-alt',
+        items: [
           {
-            name: 'List Approval',
-            to: '/data-master/list-approval'
+            name: 'VFH Approval',
+            to: '/vfh-approval'
+          },
+          {
+            name: 'Voter Data Verifikasi',
+            to: '/verifikasi-data'
           }
         ]
       },

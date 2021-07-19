@@ -42,82 +42,25 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="text-center">
-                  <td>1</td>
-                  <td>Booth 1 Sesi 1</td>
-                  <td>20-06-2021</td>
-                  <td>08:00</td>
-                  <td>13.00</td>
-                  <td>Jl. Moch Toha Gg. Curug Candung</td>
-                  <td>200</td>
+                <tr
+                  class="text-center"
+                  v-for="(data, index) in tables"
+                  :key="index">
+                  <td>{{ index + 1 }}</td>
+                  <td>{{ tables[index].namaJadwal}}</td>
+                  <td>{{ tables[index].tanggal}}</td>
+                  <td>{{ tables[index].waktuMulai}}</td>
+                  <td>{{ tables[index].waktuSelesai}}</td>
+                  <td>{{ tables[index].lokasi}}</td>
+                  <td>{{ tables[index].kuota}}</td>
                   <td>
-                    <button class="border-0 bg-transparent">
+                    <button class="border-0 bg-transparent"  @click="detailsModal = true">
                       <img src="img/icons/eye.svg" alt="">
                     </button>
                     <button class="border-0 bg-transparent">
                       <CIcon name="cil-pencil" class="text-primary"></CIcon>
                     </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-trash" class="text-danger"></CIcon>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="text-center">
-                  <td>1</td>
-                  <td>Booth 1 Sesi 1</td>
-                  <td>20-06-2021</td>
-                  <td>08:00</td>
-                  <td>13.00</td>
-                  <td>Jl. Moch Toha Gg. Curug Candung</td>
-                  <td>200</td>
-                  <td>
-                    <button class="border-0 bg-transparent">
-                      <img src="img/icons/eye.svg" alt="">
-                    </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-pencil" class="text-primary"></CIcon>
-                    </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-trash" class="text-danger"></CIcon>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="text-center">
-                  <td>1</td>
-                  <td>Booth 1 Sesi 1</td>
-                  <td>20-06-2021</td>
-                  <td>08:00</td>
-                  <td>13.00</td>
-                  <td>Jl. Moch Toha Gg. Curug Candung</td>
-                  <td>200</td>
-                  <td>
-                    <button class="border-0 bg-transparent">
-                      <img src="img/icons/eye.svg" alt="">
-                    </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-pencil" class="text-primary"></CIcon>
-                    </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-trash" class="text-danger"></CIcon>
-                    </button>
-                  </td>
-                </tr>
-                <tr class="text-center">
-                  <td>1</td>
-                  <td>Booth 1 Sesi 1</td>
-                  <td>20-06-2021</td>
-                  <td>08:00</td>
-                  <td>13.00</td>
-                  <td>Jl. Moch Toha Gg. Curug Candung</td>
-                  <td>200</td>
-                  <td>
-                    <button class="border-0 bg-transparent">
-                      <img src="img/icons/eye.svg" alt="">
-                    </button>
-                    <button class="border-0 bg-transparent">
-                      <CIcon name="cil-pencil" class="text-primary"></CIcon>
-                    </button>
-                    <button class="border-0 bg-transparent">
+                    <button class="border-0 bg-transparent" @click="deleteModal = true">
                       <CIcon name="cil-trash" class="text-danger"></CIcon>
                     </button>
                   </td>
@@ -139,5 +82,111 @@
         </CRow>
       </CCardBody>
     </CCard>
+
+    <!-- Delete Modal -->
+    <CModal
+      size="md"
+      title="Konfirmasi"
+      :show.sync="deleteModal"
+    >
+      Yakin hapus data baris ini ?
+      <template #footer>
+        <CButton @click="deleteModal = false" color="danger">Discard</CButton>
+        <CButton @click="deleteModal = false" color="success">Accept</CButton>
+      </template>
+    </CModal>
+
+    <!-- Detail Modal -->
+    <CModal
+      title="Details"
+      centered
+      :show.sync="detailsModal"
+    >
+      <table class="table border my-3">
+        <tr class="py-3">
+          <td class="py-2" width="200px">Nama Booth</td>
+          <td>:</td>
+          <td class="bold">Booth 1 Sesi 1</td>
+        </tr>
+        <tr>
+          <td class="py-2">Tanggal</td>
+          <td>:</td>
+          <td class="bold">20-06-2021</td>
+        </tr>
+        <tr>
+          <td class="py-2">Waktu Mulai</td>
+          <td>:</td>
+          <td class="bold">08:00</td>
+        </tr>
+        <tr>
+          <td class="py-2">Waktu Selesai</td>
+          <td>:</td>
+          <td class="bold">13.00</td>
+        </tr>
+        <tr>
+          <td class="py-2">Lokasi</td>
+          <td>:</td>
+          <td class="bold">jl. Moch Toha</td>
+        </tr>
+        <tr>
+          <td class="py-2">Kuota</td>
+          <td>:</td>
+          <td class="bold">200</td>
+        </tr>
+      </table>
+
+      <template #footer>
+        <div class="">
+
+        </div>
+      </template>
+    </CModal>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'Booth',
+  data () {
+    return {
+      currentPage: 1,
+      deleteModal: false,
+      detailsModal: false,
+      tables: [
+        {
+          namaJadwal: 'Booth 1 Sesi 1',
+          tanggal: '20-06-2021',
+          waktuMulai: '08:00',
+          waktuSelesai: '13.00',
+          lokasi: 'jl. Moch Toha',
+          kuota: 200,
+        },
+        {
+          namaJadwal: 'Booth 1 Sesi 1',
+          tanggal: '20-06-2021',
+          waktuMulai: '08:00',
+          waktuSelesai: '13.00',
+          lokasi: 'jl. Moch Toha',
+          kuota: 200,
+        },
+        {
+          namaJadwal: 'Booth 1 Sesi 1',
+          tanggal: '20-06-2021',
+          waktuMulai: '08:00',
+          waktuSelesai: '13.00',
+          lokasi: 'jl. Moch Toha',
+          kuota: 200,
+        },
+        {
+          namaJadwal: 'Booth 1 Sesi 1',
+          tanggal: '20-06-2021',
+          waktuMulai: '08:00',
+          waktuSelesai: '13.00',
+          lokasi: 'jl. Moch Toha',
+          kuota: 200,
+        },
+      ]
+    }
+  }
+}
+</script>

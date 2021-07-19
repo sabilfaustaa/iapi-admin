@@ -11,7 +11,11 @@
       @click="$store.commit('toggleSidebarDesktop')"
     /> -->
     <CHeaderBrand class="mx-auto d-lg-none" to="/">
-      <CIcon name="logo" height="48" alt="Logo"/>
+      <!-- <CIcon name="logo" height="48" alt="Logo"/> -->
+      <div class="c-sidebar-brand-full">
+        <img src="img/logo/image 3.png" class="logo">
+        <span class="ml-2">E-voting</span>
+      </div>
     </CHeaderBrand>
     <CHeaderNav class="d-md-down-none mr-auto">
       <CBreadcrumbRouter class="border-0 mb-0"/>
