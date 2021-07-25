@@ -10,13 +10,22 @@
         </CNav> -->
         <ul class="nav nav-pills nav-justified border-bottom mb-4">
           <li class="nav-item">
-            <a class="nav-link active" @click="activePage(0)" aria-current="page">Dewan Pengurus Nasional</a>
+            <a
+              class="nav-link active"
+              @click="activePage(0)"
+              aria-current="page"
+              >Dewan Pengurus Nasional</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" @click="activePage(1)">Dewan Pengurus Wilayah</a>
+            <a class="nav-link" @click="activePage(1)"
+              >Dewan Pengurus Wilayah</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" @click="activePage(2)">Dewan Pengurus Anggota Madya</a>
+            <a class="nav-link" @click="activePage(2)"
+              >Dewan Pengurus Anggota Madya</a
+            >
           </li>
           <li class="nav-item">
             <a class="nav-link" @click="activePage(3)">Dewan Pengawas</a>
@@ -36,17 +45,21 @@
             <small class="align-middle pr-3 py-2 font-small">Show</small>
             <CSelect
               class="cselect"
-              :options="[1,2,3,4,5,6,7,8,9,10]"
+              :options="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
             />
             <small class="align-middle px-2 py-2 font-small">entries</small>
           </CCol>
           <CCol md="9" class="text-right d-flex justify-content-end">
-            <CInput
-              class="w-16 mr-3"
-              placeholder="Cari"
-            />
+            <div class="d-flex mr-3">
+              <label class="align-middle pr-3 py-2">Jadwal</label>
+              <CSelect :options="['Jadwal Pemira']" />
+            </div>
+            <CInput class="w-16 mr-3" placeholder="Cari" />
             <div>
-              <CButton class="text-success shadow"><CIcon name="cil-description" class="mr-1"/>Export to Excel</CButton>
+              <CButton class="text-success shadow"
+                ><CIcon name="cil-description" class="mr-1" />Export to
+                Excel</CButton
+              >
             </div>
           </CCol>
         </CRow>
@@ -68,7 +81,11 @@
                   <td>1</td>
                   <td>1</td>
                   <td>
-                    <img src="img/avatars/1.jpg" class="c-avatar-img" alt="img-user">
+                    <img
+                      src="img/avatars/1.jpg"
+                      class="c-avatar-img"
+                      alt="img-user"
+                    />
                   </td>
                   <td>Muhamad Sabil</td>
                   <td>Dewan Pengurus Nasional</td>
@@ -83,10 +100,7 @@
             <span class="font-small">Showing 5 to 10 of 20 entries</span>
           </CCol>
           <CCol class="d-flex justify-content-end">
-            <CPagination
-              size="sm"
-              :active-page.sync="currentPage"
-              :pages="3"/>
+            <CPagination size="sm" :active-page.sync="currentPage" :pages="3" />
           </CCol>
         </CRow>
       </CCardBody>
@@ -96,32 +110,32 @@
 
 <script>
 export default {
-  name: 'MasterKandidat',
-  data () {
+  name: "MasterKandidat",
+  data() {
     return {
       currentPage: 1,
-    }
+    };
   },
-  methods:{
+  methods: {
     activePage: function (x) {
-      const a = document.querySelectorAll('.nav-link');
+      const a = document.querySelectorAll(".nav-link");
       for (let i = 0; i < a.length; i++) {
-        if(a[i].classList.contains('active')) {
-          a[i].classList.remove('active');
+        if (a[i].classList.contains("active")) {
+          a[i].classList.remove("active");
         }
-        if(x == 1) {
-          a[1].classList.add('active');
-        } else if ( x == 2 ) {
-          a[2].classList.add('active');
-        } else if ( x == 3 ) {
-          a[3].classList.add('active');
+        if (x == 1) {
+          a[1].classList.add("active");
+        } else if (x == 2) {
+          a[2].classList.add("active");
+        } else if (x == 3) {
+          a[3].classList.add("active");
         } else {
-          a[0].classList.add('active');
+          a[0].classList.add("active");
         }
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

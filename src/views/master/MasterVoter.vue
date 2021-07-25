@@ -7,8 +7,16 @@
             <h5>List Voters</h5>
           </CCol>
           <CCol class="text-right">
-            <CButton class="text-success mr-2 shadow" @click="importModal = true"><CIcon name="cil-description" class="mr-1"/>Import Excel</CButton>
-            <CButton class="text-success shadow"><CIcon name="cil-description" class="mr-1"/>Export to Excel</CButton>
+            <CButton
+              class="text-success mr-2 shadow"
+              @click="importModal = true"
+              ><CIcon name="cil-description" class="mr-1" />Import
+              Excel</CButton
+            >
+            <CButton class="text-success shadow"
+              ><CIcon name="cil-description" class="mr-1" />Export to
+              Excel</CButton
+            >
           </CCol>
         </CRow>
         <CRow class="my-3">
@@ -16,27 +24,31 @@
             <small class="align-middle pr-3 py-2 font-small">Show</small>
             <CSelect
               class="cselect"
-              :options="[1,2,3,4,5,6,7,8,9,10]"
+              :options="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
             />
             <small class="align-middle px-2 py-2 font-small">entries</small>
           </CCol>
           <CCol md="9" class="text-right d-flex justify-content-end">
             <div>
-              <CButton
-                class="mr-3 w-5 text-left bg-black">
+              <CButton class="mr-3 w-5 text-left bg-black">
                 <span>Non DPS</span>
-                <img src="img/icons/Filter 2.svg" class="ml-5" alt="">
+                <img src="img/icons/Filter 2.svg" class="ml-5" alt="" />
               </CButton>
             </div>
-            <CInput
-              class="w-16 mr-3"
-              placeholder="Cari"
-            />
+            <CInput class="w-16 mr-3" placeholder="Cari" />
             <div>
-              <CButton color="warning" class="text-white mr-2" @click="sendEmailModal = true">
+              <CButton
+                color="warning"
+                class="text-white mr-2"
+                @click="sendEmailModal = true"
+              >
                 Kirim Email
               </CButton>
-              <CButton color="success" to="/data-master/tambah-voters"><CIcon name="cil-plus"/><span class="ml-1">Tambah</span></CButton>
+              <CButton color="success" to="/data-master/tambah-voters"
+                ><CIcon name="cil-plus" /><span class="ml-1"
+                  >Tambah</span
+                ></CButton
+              >
             </div>
           </CCol>
         </CRow>
@@ -46,7 +58,12 @@
               <thead class="bg-primary">
                 <tr class="text-center">
                   <td>
-                    <input type="checkbox" id="checkAll" @change="checkAll" class="check">
+                    <input
+                      type="checkbox"
+                      id="checkAll"
+                      @change="checkAll"
+                      class="check"
+                    />
                   </td>
                   <td>No</td>
                   <td>No Reg. IAPI</td>
@@ -64,34 +81,60 @@
                 <tr
                   class="text-center"
                   v-for="(data, index) in tables"
-                  :key="index">
+                  :key="index"
+                >
                   <td>
-                    <input type="checkbox" id="check" @change="check" class="check">
+                    <input
+                      type="checkbox"
+                      id="check"
+                      @change="check"
+                      class="check"
+                    />
                   </td>
-                  <td>{{ index + 1 }}</td>  
-                  <td>{{ tables[index].noRegIAPI}}</td>
-                  <td class="text-left">{{ tables[index].namaLengkap}}</td>
-                  <td class="text-left">{{ tables[index].email}}</td>
-                  <td>{{ tables[index].tanggalLahir}}</td>
-                  <td>{{ tables[index].umur}}</td>
-                  <td>{{ tables[index].kategoriAnggota}}</td>
-                  <td>{{ tables[index].jenisPemilihan}}</td>
+                  <td>{{ index + 1 }}</td>
+                  <td>{{ tables[index].no_reg_iapi }}</td>
+                  <td class="text-left">{{ tables[index].name }}</td>
+                  <td class="text-left">{{ tables[index].email }}</td>
+                  <td>{{ tables[index].dob }}</td>
+                  <td>{{ tables[index].umur }}</td>
+                  <!-- <td>45</td> -->
+                  <td>{{ tables[index].category_voter }}</td>
                   <td>
-                    <span v-if="tables[index].status" class="text-success">
-                      {{ tables[index].status === true ? 'Verifikasi' : 'Belum Verifikasi'}}
+                    {{ tables[index].election_type == 1 ? "DPS" : "Non DPS" }}
+                  </td>
+                  <td>
+                    <span
+                      v-if="tables[index].status_voter == 1"
+                      class="text-success"
+                    >
+                      {{
+                        tables[index].status_voter == 1
+                          ? "Verifikasi"
+                          : "Belum Verifikasi"
+                      }}
                     </span>
                     <span v-else class="text-danger">
-                      {{ tables[index].status === true ? 'Verifikasi' : 'Belum Verifikasi'}}
+                      {{
+                        tables[index].status_voter == 1
+                          ? "Verifikasi"
+                          : "Belum Verifikasi"
+                      }}
                     </span>
                   </td>
                   <td>
-                    <button class="border-0 bg-transparent" @click="detailsModal = true">
-                      <img src="img/icons/eye.svg" alt="">
+                    <button
+                      class="border-0 bg-transparent"
+                      @click="detailsModal = true"
+                    >
+                      <img src="img/icons/eye.svg" alt="" />
                     </button>
                     <button class="border-0 bg-transparent">
                       <CIcon name="cil-pencil" class="text-primary"></CIcon>
                     </button>
-                    <button class="border-0 bg-transparent" @click="deleteModal = true">
+                    <button
+                      class="border-0 bg-transparent"
+                      @click="deleteModal = true"
+                    >
                       <CIcon name="cil-trash" class="text-danger"></CIcon>
                     </button>
                   </td>
@@ -105,21 +148,14 @@
             <span class="font-small">Showing 5 to 10 of 20 entries</span>
           </CCol>
           <CCol class="d-flex justify-content-end">
-            <CPagination
-              size="sm"
-              :active-page.sync="currentPage"
-              :pages="3"/>
+            <CPagination size="sm" :active-page.sync="currentPage" :pages="3" />
           </CCol>
         </CRow>
       </CCardBody>
     </CCard>
 
     <!-- Send Email Modal -->
-    <CModal
-      title="Konfirmasi"
-      size="md"
-      :show.sync="sendEmailModal"
-    >
+    <CModal title="Konfirmasi" :show.sync="sendEmailModal">
       Yakin akan mengirim email ?
 
       <template #footer>
@@ -129,11 +165,7 @@
     </CModal>
 
     <!-- Delete Modal -->
-    <CModal
-      size="md"
-      title="Konfirmasi"
-      :show.sync="deleteModal"
-    >
+    <CModal title="Konfirmasi" :show.sync="deleteModal">
       Yakin hapus data baris ini ?
       <template #footer>
         <CButton @click="deleteModal = false" color="danger">Discard</CButton>
@@ -142,21 +174,16 @@
     </CModal>
 
     <!-- Import File Modal -->
-    <CModal
-      title="Import Excel"
-      centered
-      :show.sync="importModal"
-    >
+    <CModal title="Import Excel" centered :show.sync="importModal">
       <div class="">
         <label for="btnDownload">Format File Import</label>
-        <button class="btn btn-success w-100" id="btnDownload">Download File Import</button>
+        <button class="btn btn-success w-100" id="btnDownload">
+          Download File Import
+        </button>
       </div>
       <div class="mt-3">
         <label for="importExcel">Upload File Excel</label>
-        <CInputFile
-          custom
-          id="importExcel"
-        />
+        <CInputFile custom id="importExcel" />
       </div>
 
       <template #footer>
@@ -166,11 +193,7 @@
     </CModal>
 
     <!-- Detail Modal -->
-    <CModal
-      title="Details"
-      centered
-      :show.sync="detailsModal"
-    >
+    <CModal title="Details" centered :show.sync="detailsModal">
       <table class="table border my-3">
         <tr class="py-3">
           <td class="py-2" width="200px">No Reg. IAPI</td>
@@ -205,129 +228,86 @@
         <tr>
           <td class="py-2">Jenis Pemilihan</td>
           <td>:</td>
-          <td class="bold">
-            VFH
-          </td>
+          <td class="bold">VFH</td>
         </tr>
         <tr>
           <td class="py-2">Status</td>
           <td>:</td>
-          <td class="bold">
-            Belum Verifikasi
-          </td>
+          <td class="bold">Belum Verifikasi</td>
         </tr>
       </table>
 
       <template #footer>
-        <div class="">
-
-        </div>
+        <div class=""></div>
       </template>
     </CModal>
   </div>
 </template>
 
 <script>
-
+import axios from "axios";
 export default {
-  name: 'MasterVoters',
-  data () {
+  name: "MasterVoters",
+  data() {
     return {
       // currentPage: 1,
       sendEmailModal: false,
       deleteModal: false,
       detailsModal: false,
       importModal: false,
-      tables: [
-        {
-          noRegIAPI: '001',
-          namaLengkap: 'Dadan Kusna',
-          email: 'dadan123@gmail.com',
-          tanggalLahir: '10-06-1980',
-          umur: '45',
-          kategoriAnggota: 'Profesional',
-          jenisPemilihan: 'VFH',
-          status: false
-        },
-        {
-          noRegIAPI: '002',
-          namaLengkap: 'Dadan Kusnandar',
-          email: 'dadan123@gmail.com',
-          tanggalLahir: '10-06-1980',
-          umur: '45',
-          kategoriAnggota: 'Profesional',
-          jenisPemilihan: 'VFH',
-          status: false
-        },
-        {
-          noRegIAPI: '003',
-          namaLengkap: 'Dadan Koswara',
-          email: 'dadankos123@gmail.com',
-          tanggalLahir: '10-06-1980',
-          umur: '42',
-          kategoriAnggota: 'Lanjutan',
-          jenisPemilihan: 'VFH',
-          status: true
-        },
-        {
-          noRegIAPI: '003',
-          namaLengkap: 'Dadan Koswara',
-          email: 'dadankos123@gmail.com',
-          tanggalLahir: '10-06-1980',
-          umur: '42',
-          kategoriAnggota: 'Lanjutan',
-          jenisPemilihan: 'VFH',
-          status: true
-        },
-        {
-          noRegIAPI: '003',
-          namaLengkap: 'Dadan Koswara',
-          email: 'dadankos123@gmail.com',
-          tanggalLahir: '10-06-1980',
-          umur: '42',
-          kategoriAnggota: 'Lanjutan',
-          jenisPemilihan: 'VFH',
-          status: true
-        },
-        {
-          noRegIAPI: '003',
-          namaLengkap: 'Dadan Koswara',
-          email: 'dadankos123@gmail.com',
-          tanggalLahir: '10-06-1980',
-          umur: '42',
-          kategoriAnggota: 'Lanjutan',
-          jenisPemilihan: 'VFH',
-          status: true
-        },
-      ]
-    }
+      tables: [],
+      detail: [],
+    };
   },
   // mounted() {
   //   this.checkAll();
   // },
-  methods:{
-    checkAll : function() {
-      const a = document.getElementById('checkAll');
-      const b = document.querySelectorAll('#check');
+  methods: {
+    checkAll: function () {
+      const a = document.getElementById("checkAll");
+      const b = document.querySelectorAll("#check");
       for (let i = 0; i < b.length; i++) {
-        if(a.checked === true) {
+        if (a.checked === true) {
           b[i].checked = true;
         } else {
           b[i].checked = false;
         }
       }
     },
-    check : function() {
-      const a = document.getElementById('checkAll');
-      const b = document.querySelectorAll('#check');
+    check: function () {
+      const a = document.getElementById("checkAll");
+      const b = document.querySelectorAll("#check");
       for (let i = 0; i < b.length; i++) {
-        if(b[i].checked === false) {
+        if (b[i].checked === false) {
           a.checked = false;
         }
       }
-    }
+    },
+    async getData() {
+      const url = "https://evoting-api.fkrdotid.tech/api/v1";
+      const res = await axios.get(url + "/voter?page=1", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("tokenAdmin"),
+        },
+      });
+      this.tables = res.data.data.data;
+    },
+    async deleteData(id) {
+      const url = "https://evoting-api.fkrdotid.tech/api/v1";
+      const res = await axios.delete(url + "/voter/" + id, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("tokenAdmin"),
+        },
+      });
+    },
+    async del(id) {
+      this.deleteData(id);
+    },
   },
-}
+  async created() {
+    this.getData();
+  },
+};
 </script>
 
 <style scoped>

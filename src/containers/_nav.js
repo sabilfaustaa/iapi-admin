@@ -22,10 +22,10 @@ export default [
             name: 'Master Kandidat',
             to: '/data-master/master-kandidat'
           },
-          {
-            name: 'Master Booth',
-            to: '/data-master/master-booth'
-          },
+          // {
+          //   name: 'Master Booth',
+          //   to: '/data-master/master-booth'
+          // },
         ]
       },
       {
@@ -34,10 +34,10 @@ export default [
         route: '/vfh-approval',
         icon: 'cil-shield-alt',
         items: [
-          {
-            name: 'VFH Approval',
-            to: '/vfh-approval'
-          },
+          // {
+          //   name: 'VFH Approval',
+          //   to: '/vfh-approval'
+          // },
           {
             name: 'Voter Data Verifikasi',
             to: '/verifikasi-data'
@@ -54,10 +54,10 @@ export default [
             name: 'Jadwal',
             to: '/election/jadwal'
           },
-          {
-            name: 'Booth',
-            to: '/election/booth'
-          }
+          // {
+          //   name: 'Booth',
+          //   to: '/election/booth'
+          // }
         ]
       },
       {
@@ -75,7 +75,7 @@ export default [
       {
         _name: 'CSidebarNavDropdown',
         name: 'Report',
-        route: '/election',
+        route: '/report',
         icon: 'cil-description',
         items: [
           {
@@ -108,7 +108,7 @@ export default [
       //   to: '/theme/typography',
       //   icon: 'cil-pencil'
       // },
-      
+
       // {
       //   _name: 'CSidebarNavItem',
       //   name: 'Charts',
